@@ -1,6 +1,7 @@
 const mongoose = require("mongoose")
 
 const productSchema = mongoose.Schema({
+    gender: String,
     name : String,
     price : String,
     image : String,
@@ -14,6 +15,7 @@ const productSchema = mongoose.Schema({
     origin : String,
     color : String,
     id: String,
+    type: String,
 })
 
 const ProductModel = mongoose.model("product", productSchema)

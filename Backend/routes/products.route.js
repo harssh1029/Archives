@@ -4,8 +4,19 @@ const productRouter = express.Router();
 
 productRouter.get("/", async (req, res) => {
     try {
-        const products = await ProductModel.find();
-        console.log('Products:', products);
+        const { gender, type, _limit } = req.query;
+        let query = {};
+
+        if (gender) {
+            query.gender = gender;
+        }
+
+        if (type) {
+            query.type = type;
+        }
+
+        const limit = _limit ? parseInt(_limit) : 10;
+        const products = await ProductModel.find(query).limit(limit);
         res.send(products);
     } catch (err) {
         console.error('Error fetching products:', err);
