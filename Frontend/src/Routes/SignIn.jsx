@@ -4,7 +4,6 @@ import "../CSS/SignIn.css"
 import { useDispatch } from 'react-redux'
 import { useNavigate } from "react-router-dom"
 import Footer from "../Components/Footer";
-import { initializeApp } from "firebase/app";
 import { signin } from '../Redux/Auth/action'
 
 const SignIn = () => {
@@ -14,27 +13,15 @@ const SignIn = () => {
     email: "",
     phone: "",
     password: "",
-    name: "",
+    username: "",
     repeatpassword: ""
   })
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyDCHvdgABXgjtj6C3-55D2colSpVF05NTI",
-    authDomain: "zara-project-adec4.firebaseapp.com",
-    projectId: "zara-project-adec4",
-    storageBucket: "zara-project-adec4.appspot.com",
-    messagingSenderId: "1083442232261",
-    appId: "1:1083442232261:web:24d99e9bc4f6e92e49e9ac",
-    measurementId: "G-JLT9HVM9BX"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
   const onclickhandler = (e) => {
     e.preventDefault();
     if (data.password === data.repeatpassword) {
-      if (data.email && data.password) {
-        dispatch(signin(data.email, data.password)).then(() => {
+      if (data.email && data.password && data.phone_no && data.username) {
+        dispatch(signin(data.email, data.password, data.username, data.phone_no)).then(() => {
           alert("Signup Successfull")
           navigate('/login')
         })
@@ -77,7 +64,10 @@ const SignIn = () => {
               <input type="password" placeholder="Enter Password" onChange={(e) => setData({ ...data, password: e.target.value })} required /><br /><br />
               <hr />
               <label htmlFor="">NAME</label><br />
-              <input type="text" placeholder='NAME' onChange={(e) => setData({ ...data, name: e.target.value })} /><br /><br />
+              <input type="text" placeholder='NAME' onChange={(e) => setData({ ...data, username: e.target.value })} /><br /><br />
+              <hr />
+              <label htmlFor="">MOBILE_NO</label><br />
+              <input type="text" placeholder='NAME' onChange={(e) => setData({ ...data, phone_no: e.target.value })} /><br /><br />
               <hr />
               <label htmlFor="">ADDRESS</label><br />
               <input type="text" placeholder='ADDRESS' /><br /><br />

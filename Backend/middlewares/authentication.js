@@ -24,7 +24,7 @@ newUser.save()
 
 exports.sign_in = async function(req, res) {
 try {
-    console.log("It's here")
+    console.log("sign in is triggered")
     const user = await User.findOne({ email: req.body.email });
     if (!user || !user.comparePassword(req.body.password)) {
     return res.status(401).json({ message: 'Authentication failed. Invalid user or password.' });

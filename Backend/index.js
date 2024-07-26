@@ -8,6 +8,10 @@ const {connection} = require("./config/db")
 const {productRouter} = require("./routes/products.route");
 const {cartRouter} = require("./routes/cart.route");
 const {userRouter} = require("./routes/user.route");
+const multer = require('multer');
+const xlsx = require('xlsx');
+const fs = require('fs');
+const path = require('path');
 const app = express();
 
 app.use(express.json())
@@ -38,6 +42,36 @@ console.log(req.headers)
 // app.use(function(req, res) {
 //   res.status(404).send({ url: req.originalUrl + ' not found' })
 // });
+
+
+const upload = multer({ dest: 'uploads/' });
+
+app.post('/upload', upload.single('file'), async (req, res) => {
+  if (!req.file) {
+      return res.status(400).send('No file uploaded.');
+  }
+
+  const filePath = path.join(__dirname, req.file.path);
+  const workbook = xlsx.readFile(filePath);
+  const sheetName = workbook.SheetNames[0];
+  const worksheet = workbook.Sheets[sheetName];
+  const data = xlsx.utils.sheet_to_json(worksheet);
+
+  try {
+      // Update the database with data from the Excel file
+      for (const item of data) {
+          await ProductModel.updateOne({ id: item.id }, item, { upsert: true });
+      }
+
+      // Delete the uploaded file after processing
+      fs.unlinkSync(filePath);
+
+      res.status(200).send('File uploaded and database updated successfully.');
+  } catch (error) {
+      console.error('Error updating database:', error);
+      res.status(500).send('Error updating database');
+  }
+});
 
 
 
