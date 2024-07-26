@@ -9,6 +9,8 @@ const {productRouter} = require("./routes/products.route");
 const {cartRouter} = require("./routes/cart.route");
 const {userRouter} = require("./routes/user.route");
 const multer = require('multer');
+const { ProductModel } = require("./models/Product.model");
+const { UserModel } = require("./models/User.model");
 const xlsx = require('xlsx');
 const fs = require('fs');
 const path = require('path');
@@ -73,6 +75,21 @@ app.post('/upload', upload.single('file'), async (req, res) => {
   }
 });
 
+
+app.get('/products/:id', async (req, res) => {
+  try {
+      const product = await ProductModel.findOne({ id: req.params.id });
+      console.log('Product:', product);
+      if (product) {
+          res.json(product);
+      } else {
+          res.status(404).json({ message: 'Product not found' });
+      }
+  } catch (error) {
+      console.error('Error fetching product:', error);
+      res.status(500).json({ message: 'Error fetching product', error });
+  }
+});
 
 
 app.use("/products", productRouter)
