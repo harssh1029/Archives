@@ -38,7 +38,7 @@ const getSingleProduct = (id) => (dispatch) => {
 const postCart = (payload) => (dispatch) => {
     dispatch({ type: types.POST_CART_REQUEST });
     return axios
-        .post(`${backendUrl}/cart`, payload)
+        .post(`${backendUrl}/cart/create`, payload)
         .then((r) => {
             return dispatch({ type: types.POST_CART_SUCCESS });
         })

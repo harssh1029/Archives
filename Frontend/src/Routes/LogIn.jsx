@@ -18,31 +18,27 @@ const LogIn = () => {
     password: ''
   })
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyDCHvdgABXgjtj6C3-55D2colSpVF05NTI",
-    authDomain: "zara-project-adec4.firebaseapp.com",
-    projectId: "zara-project-adec4",
-    storageBucket: "zara-project-adec4.appspot.com",
-    messagingSenderId: "1083442232261",
-    appId: "1:1083442232261:web:24d99e9bc4f6e92e49e9ac",
-    measurementId: "G-JLT9HVM9BX"
-  };
 
-  const app = initializeApp(firebaseConfig);
   const handleLogin = (e) => {
     e.preventDefault();
     if (data.email && data.password) {
-      dispatch(login(data.email, data.password)).then((res) => {
-        if(!res){
-          alert("You have entered wrong credentials or please Signup first")
-        }else{
-          navigate(path)
-        } 
-      })
-    }else{
-      alert("You Have entered Wrong Credentials")
+      dispatch(login(data.email, data.password))
+        .then((response) => {
+          if (response.token) {
+            console.log("yo boy");
+            // You can add any additional logic here if needed
+          } else {
+            alert("Bad credentials");
+          }
+        })
+        .catch((error) => {
+          // Handle any errors that occur during the login process
+          alert("Login Failed: " + error.message);
+        });
+    } else {
+      alert("You have entered wrong credentials");
     }
-  }
+  };
 
   if (isAuth) {
     return <Navigate to={`/`} />
