@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  # backend:
+  #   build: ./backend
+  #   image: shop-backend
+  #   ports:
+  #     - "3030:3030"
+  #   volumes:
+  #     - ./backend:/app
+  #   stdin_open: true
+  #   tty: true
+  frontend:
+    build: ./frontend
+    image: mern-app-frontend:1.0.1
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/src:/app/src
+    # stdin_open: true
+    # tty: true
+    # depends_on:
+    #   - backend
