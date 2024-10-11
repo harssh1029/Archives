@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as types from "./actionTypes";
-const backendUrl = 'http://localhost:3030'; // Adjust if your backend is running on a different port
+const backendUrl = 'http://35.226.193.132'; // Adjust if your backend is running on a different port
 
 const getProduct = (payload = 'products', limit = '', gender = '', type = '') => (dispatch) => {
     dispatch({ type: types.GET_PRODUCTS_REQUEST });

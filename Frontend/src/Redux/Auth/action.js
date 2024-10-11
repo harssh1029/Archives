@@ -18,7 +18,7 @@ export const signin = (email, password, username, phone_no) => (dispatch) => {
   dispatch({ type: types.ADD_SIGNUP_REQUEST });
 
   // Define the URL of your local server endpoint for signup
-  const localSignupUrl = 'http://localhost:3030/user/auth/register'; // Replace with your actual URL
+  const localSignupUrl = 'http://35.226.193.132/user/auth/register'; // Replace with your actual URL
 
   // Prepare the data to be sent in the POST request
   const postData = {
@@ -59,7 +59,7 @@ export const login = (email, password) => (dispatch) => {
   dispatch({ type: types.GET_LOGIN_REQUEST });
 
   // Define the URL of your local server endpoint for login
-  const localLoginUrl = 'http://localhost:3030/user/auth/sign_in'; // Replace with your actual URL
+  const localLoginUrl = 'http://35.226.193.132/user/auth/sign_in'; // Replace with your actual URL
 
   // Prepare the data to be sent in the POST request
   const postData = {
