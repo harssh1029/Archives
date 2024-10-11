@@ -96,15 +96,14 @@ app.use("/products", productRouter)
 app.use("/user", userRouter)
 app.use("/cart", cartRouter)
 
-app.listen(process.env.port, async () => {
-    try{
+app.listen(process.env.port, '0.0.0.0', async () => {
+    try {
         await connection;
-        console.log("Connected to DB Successfully")
+        console.log("Connected to DB Successfully");
+    } catch (err) {
+        console.log("Error connecting to DB");
+        console.log(err);
     }
-    catch(err){
-        console.log("Error connecting to DB")
-        console.log(err)
-    }
-    console.log(`Listening on port ${process.env.port}`)
-})
+    console.log(`Backend server running and listening on port 3030`);
+});
 
