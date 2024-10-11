@@ -14,7 +14,7 @@ const AdminPage = () => {
     formData.append('file', file);
 
     try {
-      const response = await axios.post('http://localhost:3000/upload', formData, {
+      const response = await axios.post('http://localhost:3030/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

@@ -1,5 +1,5 @@
 {
-  "proxy": "http://localhost:3001",
+  "proxy": "http://localhost:3030",
   "homepage": ".",
   "name": "green-value-83",
   "version": "0.1.0",
